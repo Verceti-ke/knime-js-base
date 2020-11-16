@@ -162,10 +162,9 @@ window.knimeMoleculeWidget = (function () {
                 } else {
                     var ketcher = sketcherFrame.get(0).contentWindow.ketcher;
                     if (ketcher) {
-                        sketcherFrame.css('height',
-                            sketcherFrame.get(0).contentWindow.document.body.scrollHeight + 'px');
-                        ketcher.init();
-                        ketcher.setMolecule(currentMolecule);
+                        if (currentMolecule !== '') {
+                            ketcher.setMolecule(currentMolecule);
+                        }
                     } else {
                         errorMessage.text('Could not initialize sketcher. Ketcher object not found.');
                         errorMessage.css('display', 'block');
@@ -195,10 +194,9 @@ window.knimeMoleculeWidget = (function () {
         var ketcherConfig = JSON.parse(response);
         require.config(ketcherConfig);
         require(['ketcher'], function (ketcher) {
-                debugger;
                 window.ketcher = ketcher;
                 var searchParams = new URLSearchParams(window.location.search)
-                searchParams.set("api_path", "js-lib/ketcher2.0");
+                searchParams.set("api_path", "js-lib/ketcher2.0/");
                 var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
                 history.pushState(null, '', newRelativePathQuery);
                 dispatchEvent(new Event('load'));
