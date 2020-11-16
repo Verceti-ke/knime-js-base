@@ -65,7 +65,7 @@ window.knimeMoleculeWidget = (function () {
     var basePathMoleculeFolder = 'org/knime/ext/js/node/widget/input/molecule/';
     var cssPathWebPortal = '/' + basePathMoleculeFolder + 'MoleculeWidget.css';
     var cssPathLegacyWebPortal = document.URL + 'VAADIN/src-js/' + basePathMoleculeFolder + 'MoleculeWidget.css';
-    var ketcherBasePath = '/js-lib/ketcher/ketcher.html';
+    var ketcherBasePath = '/js-lib/ketcher2.0/ketcher.html';
     var ketcherPathLegacyWebPortal = './VAADIN/src-js' + ketcherBasePath;
 
     var wgdiv,
@@ -190,18 +190,22 @@ window.knimeMoleculeWidget = (function () {
     };
 
     requireKetcher = function (response) {
-        var sketcherDiv = jQuery('<div class="knime-sketcher-div">');
+        var sketcherDiv = jQuery('<div class="knime-sketcher-div" role="application">');
+        wgdiv.append(sketcherDiv);
         var ketcherConfig = JSON.parse(response);
         require.config(ketcherConfig);
-        require(['ketcher'], function () {
-            requestResource(basePathMoleculeFolder + 'MoleculeWidget.html', function (response) {
-                var ketcherHTML = response;
-                sketcherDiv.html(ketcherHTML);
-                ketcher.init();
-                ketcher.setMolecule(currentMolecule);
-            });
+        require(['ketcher'], function (ketcher) {
+                debugger;
+                window.ketcher = ketcher;
+                var searchParams = new URLSearchParams(window.location.search)
+                searchParams.set("api_path", "js-lib/ketcher2.0");
+                var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+                history.pushState(null, '', newRelativePathQuery);
+                dispatchEvent(new Event('load'));
+                if (currentMolecule !== '') {
+                    ketcher.setMolecule(currentMolecule);
+                }
             sketcherDiv.css('position', 'relative');
-            wgdiv.append(sketcherDiv);
         });
     };
 
@@ -258,6 +262,7 @@ window.knimeMoleculeWidget = (function () {
     };
 
     moleculeWidget.value = function () {
+        debugger;
         var k, molecule;
         if (!viewValid) {
             return null;

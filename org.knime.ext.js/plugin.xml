@@ -186,12 +186,16 @@
                relativePathSource="js-src/org/knime/ext/js/node/widget/input/molecule/"
                relativePathTarget="org/knime/ext/js/node/widget/input/molecule/">
          </webResource>
+         <webResource
+               relativePathSource="js-lib/ketcher2.0/"
+               relativePathTarget="js-lib/ketcher2.0/">
+         </webResource>
          <importResource
                relativePath="org/knime/ext/js/node/widget/input/molecule/MoleculeWidget.js"
                type="JAVASCRIPT">
          </importResource>
          <importResource
-               relativePath="js-lib/ketcher/ketcher.css"
+               relativePath="js-lib/ketcher2.0/ketcher.css"
                type="CSS">
          </importResource>
          <importResource
@@ -204,6 +208,29 @@
          <webDependency
                webResourceBundleID="RequireJS_2.3.3">
          </webDependency>
+      </webResourceBundle>
+      <webResourceBundle
+            debug="true"
+            name="Ketcher Molecule Sketcher"
+            usesDefine="false"
+            version="2.0"
+            webResourceBundleID="Ketcher_2.0">
+         <webResource
+               relativePathSource="js-lib/ketcher2.0/"
+               relativePathTarget="js-lib/ketcher2.0/">
+         </webResource>
+         <importResource
+               relativePath="js-lib/ketcher2.0/ketcher.js"
+               type="JAVASCRIPT">
+         </importResource>
+         <importResource
+               relativePath="js-lib/ketcher2.0/ketcher.css"
+               type="CSS">
+         </importResource>
+         <importResource
+               relativePath="js-lib/ketcher/raphael.min.js"
+               type="JAVASCRIPT">
+         </importResource>
       </webResourceBundle>
    </extension>
    <extension

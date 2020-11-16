@@ -1,23 +1,9 @@
-#client_area
-{
-    height: 100% !important;
+.knime-sketcher-div {
+    height: calc(100% - 26px);
 }
-
-.knime-sketcher-frame {
-    border: none;
-    margin: 0;
-    background: none;
+.quickformcontainer {
+    height: 100%;
 }
-
-.ketcherDivMaxSize
-{
-    max-width: unset;
-    max-height: unset;
-    position: unset !important;
-    overflow: auto;
-}
-
-#ketcher_window {
-    position: unset !important;
-    width: 100% !important;
+.knime-qf-title {
+    margin-top: 0px;
 }
