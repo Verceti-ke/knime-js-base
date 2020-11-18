@@ -223,6 +223,14 @@
                relativePathSource="js-lib/ketcher2.0/"
                relativePathTarget="js-lib/ketcher2.0/">
          </webResource>
+         <webResource
+               relativePathSource="js-lib/ketcher2.0/doc"
+               relativePathTarget="doc">
+         </webResource>
+         <webResource
+               relativePathSource="js-lib/ketcher2.0/logo"
+               relativePathTarget="logo">
+         </webResource>
          <importResource
                relativePath="js-lib/ketcher2.0/ketcher.js"
                type="JAVASCRIPT">

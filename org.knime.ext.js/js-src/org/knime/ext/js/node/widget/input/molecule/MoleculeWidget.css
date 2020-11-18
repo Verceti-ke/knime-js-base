@@ -3,6 +3,7 @@
 }
 .quickformcontainer {
     height: 100%;
+    outline: none;
 }
 .knime-qf-title {
     margin-top: 0px;

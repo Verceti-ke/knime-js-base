@@ -80,9 +80,6 @@ window.knimeMoleculeWidget = (function () {
 
 
     moleculeWidget.init = function (representation) {
-        if (callCount++ > 0) {
-            return;
-        }
         if (checkMissingData(representation)) {
             return;
         }
@@ -153,8 +150,6 @@ window.knimeMoleculeWidget = (function () {
                     sketchTranslator = sketcherFrame.get(0).contentWindow.SketchTranslator;
                     if (sketchTranslator) {
                         sketchTranslator.init(currentMolecule, null, moleculeWidget.update);
-                        sketcherFrame.css('height',
-                            sketcherFrame.get(0).contentWindow.document.body.scrollHeight + 'px');
                     } else {
                         errorMessage.text('Could not initialize sketcher. SketchTranslator not found.');
                         errorMessage.css('display', 'block');
@@ -193,17 +188,18 @@ window.knimeMoleculeWidget = (function () {
         wgdiv.append(sketcherDiv);
         var ketcherConfig = JSON.parse(response);
         require.config(ketcherConfig);
+
         require(['ketcher'], function (ketcher) {
-                window.ketcher = ketcher;
-                var searchParams = new URLSearchParams(window.location.search)
-                searchParams.set("api_path", "js-lib/ketcher2.0/");
-                var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
-                history.pushState(null, '', newRelativePathQuery);
-                dispatchEvent(new Event('load'));
-                if (currentMolecule !== '') {
-                    ketcher.setMolecule(currentMolecule);
-                }
-            sketcherDiv.css('position', 'relative');
+            window.ketcher = ketcher;
+            // Set the custom Path to the ketcher files to "js-lib/ketcher2.0"
+            var searchParams = new URLSearchParams(window.location.search)
+            searchParams.set('api_path', 'js-lib/ketcher2.0/');
+            var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+            history.pushState(null, '', newRelativePathQuery);
+            dispatchEvent(new Event('load'));
+            if (currentMolecule !== '') {
+                ketcher.setMolecule(currentMolecule);
+            }
         });
     };
 
@@ -260,7 +256,6 @@ window.knimeMoleculeWidget = (function () {
     };
 
     moleculeWidget.value = function () {
-        debugger;
         var k, molecule;
         if (!viewValid) {
             return null;

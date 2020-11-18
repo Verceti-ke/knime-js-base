@@ -147,7 +147,7 @@ public class MoleculeWidgetNodeModel
     @Override
     public JSONLayoutViewContent getLayoutTemplate() {
     	 JSONLayoutViewContent view = new JSONLayoutViewContent();
-         view.setResizeMethod(ResizeMethod.VIEW_TAGGED_ELEMENT);
+         view.setResizeMethod(ResizeMethod.ASPECT_RATIO_4by3);
          return view;
     }
 
